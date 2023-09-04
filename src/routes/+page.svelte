@@ -1,4 +1,5 @@
 <script>
+    import { base } from '$app/paths'
 	import logo from '$lib/images/logo.png';
 </script>
 
@@ -8,13 +9,13 @@
 </svelte:head>
 
 <div class="text-center  rounded-3">
-    <img src="{logo}" class="bi mt-4 mb-3" width="100" height="100" alt="FindSimilar Logo">
+    <img src="{base}{logo}" class="bi mt-4 mb-3" width="100" height="100" alt="FindSimilar Logo">
     <h1 class="text-body-emphasis">Welcome to FindSimilar Demo Project!</h1>
     <p class="col-lg-8 mx-auto fs-5 text-muted">
       You can check the main features here.
     </p>
     <div class="d-inline-flex gap-2 mb-5">
-        <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="/simple">Simple usage</a>
+        <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="{base}/simple">Simple usage</a>
     </div>
 </div>
 
