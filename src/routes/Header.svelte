@@ -1,5 +1,5 @@
 <script>
-  //import { base } from '$app/paths'
+  import { base } from '$app/paths'
 	import {
         Collapse,
         Navbar,
@@ -20,15 +20,15 @@
 
 <header>
   <Navbar dark class="navbar-expand-lg bg-primary border-bottom border-dark rounded-3" data-bs-theme="dark">
-      <NavbarBrand href="/">Demo</NavbarBrand>
+      <NavbarBrand href="{base}/">Demo</NavbarBrand>
       <NavbarToggler on:click={() => (isOpen = !isOpen)} />
       <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
         <Nav navbar class="me-auto">
           <NavItem>
-            <NavLink href="/">Home</NavLink>
+            <NavLink href="{base}/">Home</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/simple">Simple Usage</NavLink>
+            <NavLink href="{base}/simple">Simple Usage</NavLink>
           </NavItem>
         </Nav>
       </Collapse>

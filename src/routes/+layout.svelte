@@ -1,5 +1,5 @@
 <script>
-  //import { base } from '$app/paths'
+  import { base } from '$app/paths'
 	import Header from './Header.svelte';
 	import logo from '$lib/images/logo.png';
 </script>
@@ -13,8 +13,8 @@
 
     <footer class="footer mt-auto d-flex flex-wrap justify-content-between align-items-center my-4 border-top rounded-3 border-dark">
     <div class="col-md-4 d-flex align-items-center">
-      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-        <img src="{logo}" class="bi" width="30" height="24" alt="FindSimilar logo">
+      <a href="{base}/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <img src="{base}{logo}" class="bi" width="30" height="24" alt="FindSimilar logo">
       </a>
       <span class="mb-3 mb-md-0 text-muted">Copyleft &#127279; FindSimilar 2023</span>
     </div>
