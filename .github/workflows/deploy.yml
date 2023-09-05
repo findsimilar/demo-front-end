@@ -24,10 +24,10 @@ jobs:
           BASE_PATH: '/demo-front-end'
         run: |
           npm run build
-          touch build/.nojekyll
+#          touch build/.nojekyll
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
             # this should match the `pages` option in your adapter-static options
-          path: 'demo-front-end/'
+          path: 'build'
