@@ -2,16 +2,19 @@
   import { base } from '$app/paths'
 	import Header from './Header.svelte';
 	import logo from '$lib/images/logo.png';
+	import { Container } from 'sveltestrap';
 </script>
 
 <div class="app">
 	<Header />
 
 	<main class="flex-shrink-0">
+    <Container fluid>
 		<slot />
+  </Container>
 	</main>
 
-    <footer class="footer mt-auto d-flex flex-wrap justify-content-between align-items-center my-4 border-top rounded-3 border-dark">
+    <footer class="footer mt-auto py-3 d-flex flex-wrap justify-content-between align-items-center py-3 px-3 border-top">
     <div class="col-md-4 d-flex align-items-center">
       <a href="{base}/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
         <img src="{logo}" class="bi" width="30" height="24" alt="FindSimilar logo">

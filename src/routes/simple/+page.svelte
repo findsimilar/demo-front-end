@@ -1,5 +1,18 @@
 <script>
-	import { Container, Form, FormGroup, Label, Button, Input } from 'sveltestrap';
+	import { 
+    Container, 
+    Form, 
+    FormGroup, 
+    Label, 
+    Button, 
+    Input,
+    Card,
+    CardHeader,
+    CardTitle,
+    CardBody,
+    ListGroup,
+    ListGroupItem
+  } from 'sveltestrap';
 	const default_separator = ','
 	//const films = 'Титаник,Матрица,Форрест Гамп,Терминатор 2,Гаттака,С широко закрытыми глазами,Основной инстинкт,Молчание ягнят,Зеленая миля,Достучаться до небес,Пятый элемент,Побег из Шоушенка,Телохранитель,Люди в черном,Бойцовский клуб,Один дома,Бетховен,Криминальное чтиво,Умница Уилл Хантинг,Маска,Знакомьтесь, Джо Блэк,День сурка,Большой Лебовски,Леон,Американский пирог,Шоу Трумана,Красотка,Адвокат дьявола'
   const film_list = [
@@ -58,6 +71,7 @@
 
   let text_value = ""
   let texts_value = ""
+  let separator = default_separator
 
   const set_example_value = () => {
     text_value = film
@@ -67,6 +81,40 @@
   const clear = () => {
     text_value = ""
     texts_value = ""
+  }
+
+  let result_similars = []
+
+  async function get_similars(text, texts) {
+    const url = 'http://127.0.0.1:8000/api/'
+    const data = {
+            'text_to_check': text,
+            'texts': texts,
+            'language': 'russian',
+            'count': texts.length,
+        }
+    const res = await fetch(url,
+      {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify(data)
+      })
+
+      console.log('res', res)
+      if (res.ok) {
+        return await res.json();
+      } else {
+          // Sometimes the API will fail!
+          throw new Error('Request failed');
+      }
+  }
+
+  const find_similar = () => {
+    const text_list = texts_value.split(separator)
+    result_similars = get_similars(text_value, text_list)
   }
 </script>
 
@@ -81,18 +129,43 @@
    <Form method="post">
     <FormGroup>
         <Label for="text">Input text to find similars:</Label>
-        <Input id="text" name="text" value={text_value} placeholder={film_placeholder} />
+        <Input id="text" name="text" bind:value={text_value} placeholder={film_placeholder} />
     </FormGroup>
      <FormGroup>
         <Label for="texts">Input a list of texts separated by (default ,):</Label>
-        <Input type="textarea" cols="35" rows="7" value={texts_value} name="texts" id="texts" placeholder={films_placeholder}/>
+        <Input type="textarea" cols="35" rows="7" bind:value={texts_value} name="texts" id="texts" placeholder={films_placeholder}/>
       </FormGroup>
        <FormGroup>
         <Label for="separator">Input separator (Default {default_separator})</Label>
-        <Input id="separator" name="separator" placeholder="Separator. Default {default_separator}"  value="{default_separator}"/>
+        <Input id="separator" name="separator" placeholder="Separator. Default {default_separator}"  bind:value="{separator}"/>
     </FormGroup>
-    <Button type="button" color="primary">Find similar</Button>
+    <Button type="button" color="primary" on:click={find_similar}>Find similar</Button>
     <Button type="button" on:click={clear} color="danger">Clear form</Button>
   </Form>
   <p></p>
+
+  {#await result_similars}
+	  <p>...waiting</p>
+  {:then result_similars_list}
+    <h1>Result:</h1>
+    <Card>
+      <CardHeader>
+        <CardTitle>{text_value}</CardTitle>
+      </CardHeader>
+    
+      <CardBody>
+        <ListGroup>
+          {#each result_similars_list as result_similar, index}
+            <ListGroupItem>{index}) {result_similar.text} - ({result_similar.cos})</ListGroupItem>
+          {/each}
+          
+        </ListGroup>
+      </CardBody>
+    </Card>
+  {:catch error}
+    <p style="color: red">{error.message}</p>
+  {/await}
+
+ 
+  
 </Container>
