@@ -1,4 +1,5 @@
 <script>
+  import { dev } from '$app/environment';
 	import { 
     Container, 
     Form, 
@@ -86,7 +87,7 @@
   let result_similars = []
 
   async function get_similars(text, texts) {
-    const url = 'http://127.0.0.1:8000/api/'
+    const url = dev ? 'http://127.0.0.1:8000/api/' : 'http://api.findsimilar.org/api/'
     const data = {
             'text_to_check': text,
             'texts': texts,

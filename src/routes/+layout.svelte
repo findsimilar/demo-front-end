@@ -5,10 +5,10 @@
 	import { Container } from 'sveltestrap';
 </script>
 
-<div class="app">
+<div class="app d-flex flex-column h-100">
 	<Header />
 
-	<main class="flex-shrink-0">
+	<main class="d-flex flex-column h-100">
     <Container fluid>
 		<slot />
   </Container>
