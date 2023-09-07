@@ -1,51 +1,37 @@
-name: Deploy to GitHub Pages
+# .github/workflows/deploy.yml
+name: Deploy to production server
 
 on:
-  push:
-    branches: ['main']
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  workflow_run:
+    workflows: ["Build and push to DockerHub"]
+    branches: ["main"]
+    types:
+      - completed
 
 jobs:
-  build_site:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - name: Copy docker-compose.production.yml via ssh
+        uses: appleboy/scp-action@master
         with:
-          node-version: 18
-          cache: npm
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: build
-        env:
-          BASE_PATH: "/demo-front-end"
-        run: |
-          npm run build
-#          touch build/.nojekyll
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          source: "docker-compose.production.yml"
+          target: "demo-front-end"
+      - name: Executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
         with:
-          # Upload entire repository
-          path: './demo-front-end'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script: |
+            cd demo-front-end
+            docker compose -f docker-compose.production.yml pull
+            docker compose -f docker-compose.production.yml down
+            docker compose -f docker-compose.production.yml up -d
