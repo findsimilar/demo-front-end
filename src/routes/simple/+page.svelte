@@ -87,7 +87,7 @@
   let result_similars = []
 
   async function get_similars(text, texts) {
-    const url = dev ? 'http://127.0.0.1:8000/api/' : 'http://api.findsimilar.org/api/'
+    const url = dev ? 'http://127.0.0.1:8000/api/' : 'http://188.64.12.238:8000/api/'
     const data = {
             'text_to_check': text,
             'texts': texts,
