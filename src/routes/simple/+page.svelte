@@ -12,7 +12,9 @@
     CardTitle,
     CardBody,
     ListGroup,
-    ListGroupItem
+    ListGroupItem,
+    Row,
+    Col
   } from 'sveltestrap';
 	const default_separator = ','
 	//const films = 'Титаник,Матрица,Форрест Гамп,Терминатор 2,Гаттака,С широко закрытыми глазами,Основной инстинкт,Молчание ягнят,Зеленая миля,Достучаться до небес,Пятый элемент,Побег из Шоушенка,Телохранитель,Люди в черном,Бойцовский клуб,Один дома,Бетховен,Криминальное чтиво,Умница Уилл Хантинг,Маска,Знакомьтесь, Джо Блэк,День сурка,Большой Лебовски,Леон,Американский пирог,Шоу Трумана,Красотка,Адвокат дьявола'
@@ -82,6 +84,7 @@
   const clear = () => {
     text_value = ""
     texts_value = ""
+    result_similars = []
   }
 
   let result_similars = []
@@ -125,31 +128,44 @@
 </svelte:head>
 
 <Container fluid>
-  <p></p>
-  Input your data below or try our example first -> <Button on:click={set_example_value} color="info" type="button">Try example</Button>
-   <Form method="post">
+  <Row cols={3}>
+    <Col>
+      <div class="mt-1">
+      This is the most simple example. <br>You can compare one text to anothers and find similars.
+      <p></p>
+      Input text to compare to the <b>Main text</b> input.<br>
+      Any text will be good. For example: <b>{film}</b>.<p></p>
+      Input other texts to compare and find similars to the <b>List of texts</b> input.<br>
+      For example: <b>{films.slice(0, 159)}...</b><p></p>
+      By default (<b>,</b>) uses as separator. But you can change it.<br>
+      Input any text to <b>Separator</b> input if you want.<p></p>
+      When everything is ready, press the <b>Find similar</b> button and enjoy the results.<p></p>
+      We prepared the example for you: -> <Button on:click={set_example_value} color="info" type="button">Try example</Button>
+    </div>
+    </Col>
+    <Col>
+   <Form method="post" class="mt-1">
     <FormGroup>
-        <Label for="text">Input text to find similars:</Label>
-        <Input id="text" name="text" bind:value={text_value} placeholder={film_placeholder} />
+        <Label for="text">Main text:</Label>
+        <Input id="text" name="text" bind:value={text_value} />
     </FormGroup>
      <FormGroup>
-        <Label for="texts">Input a list of texts separated by (default ,):</Label>
-        <Input type="textarea" cols="35" rows="7" bind:value={texts_value} name="texts" id="texts" placeholder={films_placeholder}/>
+        <Label for="texts">List of texts separated by (default ,):</Label>
+        <Input type="textarea" cols="35" rows="10" bind:value={texts_value} name="texts" id="texts" />
       </FormGroup>
        <FormGroup>
-        <Label for="separator">Input separator (Default {default_separator})</Label>
+        <Label for="separator">Separator (default {default_separator})</Label>
         <Input id="separator" name="separator" placeholder="Separator. Default {default_separator}"  bind:value="{separator}"/>
     </FormGroup>
     <Button type="button" color="primary" on:click={find_similar}>Find similar</Button>
     <Button type="button" on:click={clear} color="danger">Clear form</Button>
   </Form>
-  <p></p>
-
+</Col>
+<Col>
   {#await result_similars}
 	  <p>...waiting</p>
   {:then result_similars_list}
-    <h1>Result:</h1>
-    <Card>
+    <Card class="mt-3">
       <CardHeader>
         <CardTitle>{text_value}</CardTitle>
       </CardHeader>
@@ -166,7 +182,7 @@
   {:catch error}
     <p style="color: red">{error.message}</p>
   {/await}
-
- 
+  </Col>
+</Row>
   
 </Container>
