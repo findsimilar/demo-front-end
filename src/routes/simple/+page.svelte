@@ -128,61 +128,58 @@
 </svelte:head>
 
 <Container fluid>
-  <Row cols={3}>
-    <Col>
+  <Row>
+    <Col lg={4}>
       <div class="mt-1">
-      This is the most simple example. <br>You can compare one text to anothers and find similars.
-      <p></p>
-      Input text to compare to the <b>Main text</b> input.<br>
-      Any text will be good. For example: <b>{film}</b>.<p></p>
-      Input other texts to compare and find similars to the <b>List of texts</b> input.<br>
-      For example: <b>{films.slice(0, 159)}...</b><p></p>
-      By default (<b>,</b>) uses as separator. But you can change it.<br>
-      Input any text to <b>Separator</b> input if you want.<p></p>
-      When everything is ready, press the <b>Find similar</b> button and enjoy the results.<p></p>
-      We prepared the example for you: -> <Button on:click={set_example_value} color="info" type="button">Try example</Button>
-    </div>
+        This is the most simple example. <br>You can compare one text to anothers and find similars.
+        <p></p>
+        Input text to compare to the <b>Main text</b> input.<br>
+        Any text will be good. For example: <b>{film}</b>.<p></p>
+        Input other texts to compare and find similars to the <b>List of texts</b> input.<br>
+        For example: <b>{films.slice(0, 159)}...</b><p></p>
+        By default (<b>,</b>) uses as separator. But you can change it.<br>
+        Input any text to <b>Separator</b> input if you want.<p></p>
+        When everything is ready, press the <b>Find similar</b> button and enjoy the results.<p></p>
+        We prepared the example for you: -> <Button on:click={set_example_value} color="info" type="button">Try example</Button>
+      </div>
     </Col>
-    <Col>
-   <Form method="post" class="mt-1">
-    <FormGroup>
-        <Label for="text">Main text:</Label>
-        <Input id="text" name="text" bind:value={text_value} />
-    </FormGroup>
-     <FormGroup>
-        <Label for="texts">List of texts separated by (default ,):</Label>
-        <Input type="textarea" cols="35" rows="10" bind:value={texts_value} name="texts" id="texts" />
-      </FormGroup>
-       <FormGroup>
-        <Label for="separator">Separator (default {default_separator})</Label>
-        <Input id="separator" name="separator" placeholder="Separator. Default {default_separator}"  bind:value="{separator}"/>
-    </FormGroup>
-    <Button type="button" color="primary" on:click={find_similar}>Find similar</Button>
-    <Button type="button" on:click={clear} color="danger">Clear form</Button>
-  </Form>
-</Col>
-<Col>
-  {#await result_similars}
-	  <p>...waiting</p>
-  {:then result_similars_list}
-    <Card class="mt-3">
-      <CardHeader>
-        <CardTitle>{text_value}</CardTitle>
-      </CardHeader>
-    
-      <CardBody>
-        <ListGroup>
-          {#each result_similars_list as result_similar, index}
-            <ListGroupItem>{index}) {result_similar.text} - ({result_similar.cos})</ListGroupItem>
-          {/each}
-          
-        </ListGroup>
-      </CardBody>
-    </Card>
-  {:catch error}
-    <p style="color: red">{error.message}</p>
-  {/await}
-  </Col>
-</Row>
-  
+    <Col lg={4}>
+      <Form method="post" class="mt-1">
+        <FormGroup>
+          <Label for="text">Main text:</Label>
+          <Input id="text" name="text" bind:value={text_value} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="texts">List of texts separated by (default ,):</Label>
+          <Input type="textarea" cols="35" rows="10" bind:value={texts_value} name="texts" id="texts" />
+        </FormGroup>
+        <FormGroup>
+          <Label for="separator">Separator (default {default_separator})</Label>
+          <Input id="separator" name="separator" placeholder="Separator. Default {default_separator}"  bind:value="{separator}"/>
+        </FormGroup>
+        <Button type="button" color="primary" on:click={find_similar}>Find similar</Button>
+        <Button type="button" on:click={clear} color="danger">Clear form</Button>
+      </Form>
+    </Col>
+    <Col lg={4}>
+      {#await result_similars}
+        <p>...waiting</p>
+      {:then result_similars_list}
+        <Card class="mt-3">
+          <CardHeader>
+            <CardTitle>{text_value}</CardTitle>
+          </CardHeader>
+          <CardBody>
+            <ListGroup>
+              {#each result_similars_list as result_similar, index}
+                <ListGroupItem>{index}) {result_similar.text} - ({result_similar.cos})</ListGroupItem>
+              {/each}
+            </ListGroup>
+          </CardBody>
+        </Card>
+      {:catch error}
+        <p style="color: red">{error.message}</p>
+      {/await}
+    </Col>
+  </Row>
 </Container>
