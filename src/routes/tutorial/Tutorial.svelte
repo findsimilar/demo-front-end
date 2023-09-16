@@ -1,0 +1,74 @@
+<script>
+    import {
+        text, 
+        texts, 
+        separator,
+    } from './stores.js'
+    
+    import {
+        Button
+    } from 'sveltestrap'
+    import { dev } from '$app/environment'
+
+    async function fetch_example(name) {
+    const url = dev ? `http://127.0.0.1:8000/api/examples/${name}/` : `http://188.64.12.238:8000/api/examples/${name}/`
+    const res = await fetch(url,
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "GET",
+        })
+
+        console.log('res', res)
+        if (res.ok) {
+            return await res.json();
+        } else {
+            // Sometimes the API will fail!
+            throw new Error('Request failed');
+        }
+    }
+
+    let example = {}
+
+    const get_example = () => {
+        example = fetch_example('films-demo')
+    }
+
+    const set_example_value = (example) => {
+        text.set(example.text)
+        separator.reset()
+        texts.set(example.texts.join($separator))    
+    }
+
+    get_example()
+
+    const default_separator = $separator
+
+</script>
+
+<div class="mt-1">
+    {#await example}
+    <p>...waiting</p>
+    {:then example}
+    This is the most simple example. <br>You can compare one text to anothers and find similars.
+    <p></p>
+    Input text to compare to the <b>Main text</b> input.<br>
+    Any text will be good. For example: <b>
+        {example.text}
+    </b>.<p></p>
+    Input other texts to compare and find similars to the <b>List of texts</b> input.<br>
+    For example: <b>
+
+        {example.texts.join(default_separator).slice(0, 159)}...
+    
+    </b><p></p>
+    By default (<b>,</b>) uses as separator. But you can change it.<br>
+    Input any text to <b>Separator</b> input if you want.<p></p>
+    When everything is ready, press the <b>Find similar</b> button and enjoy the results.<p></p>
+    We prepared the example for you: -> <Button on:click={() => set_example_value(example)} color="info" type="button">Try example</Button>
+    {:catch error}
+        <p style="color: red">{error.message}</p>
+    {/await}
+</div>

@@ -27,7 +27,7 @@
             <NavLink href="/">Home</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/simple">Simple Usage</NavLink>
+            <NavLink href="/tutorial">Tutorial</NavLink>
           </NavItem>
         </Nav>
       </Collapse>
