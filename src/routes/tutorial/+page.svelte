@@ -23,7 +23,7 @@
             'text_to_check': text,
             'texts': texts,
             'language': 'russian',
-            'count': texts.length,
+            'count': 10,
         }
     const res = await fetch(url,
       {
@@ -51,8 +51,8 @@
 </script>
 
 <svelte:head>
-	<title>Simple usage</title>
-	<meta name="description" content="Simple usage example" />
+	<title>Tutorial</title>
+	<meta name="description" content="Tutorial" />
 </svelte:head>
 
 <Container fluid>

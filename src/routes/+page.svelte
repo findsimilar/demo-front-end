@@ -14,7 +14,7 @@
       You can check the main features here.
     </p>
     <div class="d-inline-flex gap-2 mb-5">
-        <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="/simple">Simple usage</a>
+        <a class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" href="/tutorial">Tutorial</a>
     </div>
 </div>
 
