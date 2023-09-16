@@ -5,7 +5,9 @@
     separator,
 
   } from './stores.js'
-  import { dev } from '$app/environment';
+  import {
+    fetch_data
+  } from './core.js'
 	import { 
     Container, 
     Row,
@@ -18,30 +20,14 @@
   let result_similars = []
 
   async function get_similars(text, texts) {
-    const url = dev ? 'http://127.0.0.1:8000/api/' : 'http://188.64.12.238:8000/api/'
+    const url = '/'
     const data = {
             'text_to_check': text,
             'texts': texts,
             'language': 'russian',
             'count': 10,
         }
-    const res = await fetch(url,
-      {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          method: "POST",
-          body: JSON.stringify(data)
-      })
-
-      console.log('res', res)
-      if (res.ok) {
-        return await res.json();
-      } else {
-          // Sometimes the API will fail!
-          throw new Error('Request failed');
-      }
+    return fetch_data(url, 'POST', data)
   }
 
   const find_similar = () => {

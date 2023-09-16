@@ -4,30 +4,15 @@
         texts, 
         separator,
     } from './stores.js'
+    import { fetch_data } from './core.js'
     
     import {
         Button
     } from 'sveltestrap'
-    import { dev } from '$app/environment'
 
     async function fetch_example(name) {
-    const url = dev ? `http://127.0.0.1:8000/api/examples/${name}/` : `http://188.64.12.238:8000/api/examples/${name}/`
-    const res = await fetch(url,
-        {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: "GET",
-        })
-
-        console.log('res', res)
-        if (res.ok) {
-            return await res.json();
-        } else {
-            // Sometimes the API will fail!
-            throw new Error('Request failed');
-        }
+        const url = `/examples/${name}/`
+        return fetch_data(url, 'GET')
     }
 
     let example = {}
