@@ -24,7 +24,7 @@
     const data = {
             'text_to_check': text,
             'texts': texts,
-            'language': 'russian',
+            'language': 'english',
             'count': 10,
         }
     return fetch_data(url, 'POST', data)
