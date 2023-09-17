@@ -3,5 +3,5 @@ services:
   frontend:
     image: findsimilar/demo-front-end
     ports:
-      - 80:80
+      - 3000:80
     restart: always
