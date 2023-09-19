@@ -27,7 +27,26 @@
             'language': 'english',
             'count': 10,
         }
-    return fetch_data(url, 'POST', data)
+
+    const mocked_result = [
+      {
+        text: 'one',
+        cos: 1.0,
+      },
+      {
+        text: 'two',
+        cos: 0.6,
+      },
+      {
+        text: 'three',
+        cos: 0.2,
+      },
+      {
+        text: 'thour',
+        cos: 0.0
+      },
+    ]
+    return fetch_data(url, 'POST', data, mocked_result)
   }
 
   const find_similar = () => {
