@@ -1,6 +1,6 @@
 import { dev } from '$app/environment'
 
-const IS_MOCK_RESULTS = true // change it to get responses from server
+const IS_MOCK_RESULTS = false // change it to get responses from server
 
 export async function fetch_data(url, method, data, mocked_result={}) {
 
@@ -20,6 +20,7 @@ export async function fetch_data(url, method, data, mocked_result={}) {
             method: method,
         }
         if (data !== 'undefined') {
+            console.log(data)
             params.body = JSON.stringify(data)
         }
         const res = await fetch(full_url, params)
@@ -30,4 +31,41 @@ export async function fetch_data(url, method, data, mocked_result={}) {
         } else {
             throw new Error('Request failed');
         }
+    }
+
+export async function get_similars(
+    text, 
+    texts, 
+    remove_stopwords=true, 
+    language='english',
+    count=10,
+    ) {
+    const url = '/'
+    const data = {
+            text_to_check: text,
+            texts: texts,
+            remove_stopwords: remove_stopwords,
+            language: language,
+            count: count,
+        }
+
+    const mocked_result = [
+        {
+        text: 'one',
+        cos: 1.0,
+        },
+        {
+        text: 'two',
+        cos: 0.6,
+        },
+        {
+        text: 'three',
+        cos: 0.2,
+        },
+        {
+        text: 'thour',
+        cos: 0.0
+        },
+    ]
+    return fetch_data(url, 'POST', data, mocked_result)
     }

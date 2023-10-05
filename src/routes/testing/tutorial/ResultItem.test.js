@@ -1,6 +1,6 @@
 import {describe, expect, test} from 'vitest';
 import { render, screen } from "@testing-library/svelte";
-import ResultItem from '../../tutorial/ResultItem.svelte';
+import ResultItem from '../../components/ResultItem.svelte';
 
 describe("ResultItem", () => {
   const resultItemMiddle = { index: 1, text: 'some text', cos: 0.5 };
