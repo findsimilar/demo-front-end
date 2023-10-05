@@ -7,7 +7,7 @@
         ListGroup,
     } from 'sveltestrap'
     import ResultItem from './ResultItem.svelte';
-    export let result_similars
+    export let result_similars = []
     export let text
 </script>
 

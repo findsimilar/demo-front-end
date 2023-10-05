@@ -1,5 +1,5 @@
 <script>
-	import Header from './Header.svelte';
+	import Header from './components/Header.svelte'
 	import { Container } from 'sveltestrap';
   //import Footer from './Footer.svelte';
 </script>
