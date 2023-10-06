@@ -41,9 +41,8 @@ In this example you cant use <b>Language</b> input to set the language.<p></p>
 Again we prepaire fore you some examples to try:
 <ListGroup>
     <ListGroupItem><Button on:click={show_english} color="primary" type="button">English</Button></ListGroupItem>
-    <ListGroupItem><Button on:click={show_russian} color="info" type="button">Russian</Button></ListGroupItem>
     <ListGroupItem><Button on:click={show_turkish} color="info" type="button">Turkish</Button></ListGroupItem>
-    
+    <ListGroupItem><Button on:click={show_russian} color="info" type="button">Russian</Button></ListGroupItem>
 </ListGroup>
 <p></p>
 Some languages don't support yet :( <br>
