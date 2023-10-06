@@ -7,6 +7,7 @@
     import RemoveStopWordsExample from './RemoveStopWordsExample.svelte'
     import SimpleUsageExample from './SimpleUsageExample.svelte'
     import ManyLanguagesExample from './ManyLanguagesExample.svelte'
+    import CountExample from './CountExample.svelte'
 
     import {
       fetch_data
@@ -52,6 +53,12 @@
             query_name: ['films-demo', 'films-demo-ru', 'films-demo-ua', 'films-demo-tr'],
             extended_fields: ['remove_stopwords', 'language'],
             component: ManyLanguagesExample,
+        },
+        {
+            name: '4. Results count',
+            query_name: 'films-description',
+            extended_fields: ['remove_stopwords', 'language', 'count'],
+            component: CountExample,
         }
     ]
 

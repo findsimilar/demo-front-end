@@ -7,14 +7,12 @@
     import {
 	  count,
       language,
-      remove_stopwords,
     } from '../stores.js'
     export let example
     export let show_example
 
     const show_with_language = (name, lang) => {
         show_example(example[name])
-        remove_stopwords.set(true)
         count.set(18)
         language.set(lang)
     }
