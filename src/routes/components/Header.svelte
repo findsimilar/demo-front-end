@@ -65,6 +65,9 @@
           <NavItem>
             <NavLink href="/all-features">All Features</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink href="http://api.findsimilar.org" target="_blank">Demo API</NavLink>
+          </NavItem>
         </Nav>
         <form class="d-flex">
         <select class="form-select" bind:value={selected_theme}>
