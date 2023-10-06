@@ -6,6 +6,8 @@
     import Inputs from '../components/Inputs.svelte'
     import RemoveStopWordsExample from './RemoveStopWordsExample.svelte'
     import SimpleUsageExample from './SimpleUsageExample.svelte'
+    import ManyLanguagesExample from './ManyLanguagesExample.svelte'
+
     import {
       fetch_data
     } from '../core.js'
@@ -44,6 +46,12 @@
             query_name: 'films-description',
             extended_fields: ['remove_stopwords'],
             component: RemoveStopWordsExample,
+        },
+        {
+            name: '3. Different languages',
+            query_name: ['films-demo', 'films-demo-ru', 'films-demo-ua', 'films-demo-tr'],
+            extended_fields: ['remove_stopwords', 'language'],
+            component: ManyLanguagesExample,
         }
     ]
 
@@ -70,9 +78,21 @@
 
     let example = {}
 
-    const get_example = (name) => {
-    example = fetch_example(name)
+    const get_example = (query_name) => {
+      if (typeof query_name === "string") {
+        example = fetch_example(query_name)
+      }
+      else {
+        let many_examples = {}
+        for (const name of query_name) {
+          fetch_example(name).then((one_example) => {
+            many_examples[name] = one_example
+          })
+        }
+        example = many_examples
+      }
     }
+
     get_example(current_example.query_name)
 
     const clear = () => {
@@ -92,6 +112,8 @@
 
     const show_example = (example) => {
         clear()
+        console.log(example)
+        console.log(example.text)
         text.set(example.text)
         texts.set(example.texts.join($separator))
     }
