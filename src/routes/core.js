@@ -27,9 +27,18 @@ export async function fetch_data(url, method, data, mocked_result={}) {
 
         console.log('res', res)
         if (res.ok) {
-            return await res.json();
-        } else {
-            throw new Error('Request failed');
+            const json = await res.json()
+            return json
+        }
+        else if (res.status == 400) {
+            const json = await res.json()
+            const error_result = {
+                errors: json
+            }
+            return error_result;
+        }
+        else {
+            throw new Error('Request failed. Something went wrong :(');
         }
     }
 
