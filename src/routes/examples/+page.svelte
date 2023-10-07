@@ -168,6 +168,6 @@
     <Button on:click={() => select_example(next_example)} color="link">Next: {next_example.name}</Button>
   {/if}
 </div>
-  <Inputs slot="inputs" {result_similars} {find_similar} {clear} extended_fields={current_example.extended_fields} />
+  <Inputs slot="inputs" {find_similar} {clear} extended_fields={current_example.extended_fields} />
   <Results slot="results" {result_similars} text={$text} />
 </Example>
