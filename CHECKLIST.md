@@ -29,10 +29,10 @@
 - [x] [Support](https://github.com/libresource/open-source-checklist#support)
 
 [CI and CD](https://github.com/libresource/open-source-checklist#ci-and-cd)
-- [x] Tests
-- [x] Test Coverage
-- [x] Test Coverage 100%
-- [x] Linters
+- [ ] Tests
+- [ ] Test Coverage
+- [ ] Test Coverage 100%
+- [ ] Linters
 - [x] Build
 - [x] Deploy
 - [ ] [New User Greetings](https://github.com/libresource/open-source-checklist#new-user-greetings)
