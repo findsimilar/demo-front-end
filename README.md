@@ -1,16 +1,32 @@
-# DEMO-FRONT-END project for FindSimilar
+# Demo front-end
 
-This is the part of big project **FindSimilar**
+Front-end part of [find-similar](https://github.com/findsimilar/find-similar) demo project
 
-* You are on [GitHub page](https://github.com/findsimilar/demo-front-end/)
-* This website available on [demo.findsimilar.org](http://demo.findsimilar.org)
-* API backend available on [api.findsimilar.org](http://api.findsimilar.org)
-* API backend [repository on GitHub](https://github.com/findsimilar/demo)
-* Core library [find-similar](https://github.com/findsimilar/find-similar)
-* Organization website [findsimilar.org](https://findsimilar.org)
+## Available
+It available on [demo.findsimilar.org](https://demo.findsimilar.org)
+Back-end webapp available on [api.findsimilar.org](http://api.findsimilar.org)
 
-## To Get Involved
+## Open Source Project
 
-Get start with:
-* [Developer Guidelines](https://github.com/findsimilar/demo-front-end/blob/master/DEVELOPER_GUIDELINES.md)
-* [Developer Documentation](https://github.com/findsimilar/demo-front-end/blob/master/DEVELOPER_DOCUMENTATION.md)
+This is the open source project with [GPL-3.0 license](LICENSE). 
+Be free to use, fork, clone and contribute.
+
+## Features
+
+**Demo webapp** to demonstrate [find-similar](https://github.com/findsimilar/find-similar)
+main features
+
+## Contributing
+
+Want to contribute? You are welcome! 
+To easy start please check:
+
+- How to [contribute](CONTRIBUTING.md)
+- How to [support](SUPPORT.md)
+- About [governance](GOVERNANCE.md)
+- [Security policy](SECURITY.md)
+- [Developer documentation](DEVELOPER_DOCUMENTATION.md) below
+
+## FAQ
+
+Empty yet
