@@ -3,9 +3,12 @@
 Front-end part of [find-similar](https://github.com/findsimilar/find-similar) demo project
 
 ## Run in Docker
+
+```
 docker compose pull
 docker compose down
-docker compose up -d
+docker compose up
+```
 
 ## Open Source Project
 
