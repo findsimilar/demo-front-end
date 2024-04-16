@@ -2,9 +2,10 @@
 
 Front-end part of [find-similar](https://github.com/findsimilar/find-similar) demo project
 
-## Available
-It available on [demo.findsimilar.org](https://demo.findsimilar.org)
-Back-end webapp available on [api.findsimilar.org](http://api.findsimilar.org)
+## Run in Docker
+docker compose pull
+docker compose down
+docker compose up -d
 
 ## Open Source Project
 
